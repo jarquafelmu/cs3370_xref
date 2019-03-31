@@ -68,12 +68,14 @@ int main (int argc, char** argv) {
     return 1;
   }
 
-  std::cout << std::endl << "Information received: " << std::endl;
-  for( auto& item : data) {
-    std::cout << item << std::endl;
-  }
+  // std::cout << std::endl << "Information received: " << std::endl;
+  // for( auto& item : data) {
+  //   std::cout << item << std::endl;
+  // }
 
   ref.process ( data );
+
+  std::cout << ref;
 
   return 0;
 }
