@@ -23,8 +23,11 @@
 class XRef final {
 	struct Comp final {
 		bool operator()( const std::string& lhs, const std::string& rhs ) const {
-			if ( STRING_HELPER.iequal ( lhs, rhs ) ) { return lhs < rhs; }
-			return STRING_HELPER.lower ( lhs ) < STRING_HELPER.lower ( rhs );
+			auto const lower_lhs { STRING_HELPER.lower ( lhs ) };
+			auto const lower_rhs { STRING_HELPER.lower ( rhs ) };
+
+			if ( !(lower_lhs < lower_rhs) && !(lower_rhs < lower_lhs) ) { return lhs < rhs; }
+			return lower_lhs < lower_rhs;
 		}
 	};
 
