@@ -2,7 +2,7 @@
 // Name: Sam Terrazas
 // File: StringHelper.h
 // Created: 03/31/2019 8:03 AM
-// Updated: 03/31/2019 8:21 AM
+// Updated: 04/02/2019 8:37 PM
 // 
 // I declare that the following source code was written by me, or provided
 // by the instructor for this project. I understand that copying source
@@ -62,13 +62,13 @@ public:
 			} );
 	}
 
-	static std::string lower ( std::string s ) {
-		std::transform ( s.begin (), s.end (), s.begin (), tolower ); 
+	static std::string lower( std::string s ) {
+		std::transform ( s.begin (), s.end (), s.begin (), tolower );
 		return s;
 	}
 
-	static std::string upper( std::string s ) { 
-		std::transform ( s.begin (), s.end (), s.begin (), toupper ); 
+	static std::string upper( std::string s ) {
+		std::transform ( s.begin (), s.end (), s.begin (), toupper );
 		return s;
 	}
 } STRING_HELPER {};

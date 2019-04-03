@@ -2,7 +2,7 @@
 // Name: Sam Terrazas
 // File: main.cpp
 // Created: 03/27/2019 6:21 PM
-// Updated: 03/31/2019 8:21 AM
+// Updated: 04/02/2019 8:36 PM
 // 
 // I declare that the following source code was written by me, or provided
 // by the instructor for this project. I understand that copying source
@@ -22,6 +22,7 @@
 
 void Read( std::istream& is, std::vector<std::string>& vec );
 
+// done so that std::copy can ignore carriage returns and keep going until the istream fails
 struct Line final {
 	std::string line_data;
 
@@ -35,17 +36,6 @@ std::istream& operator>>( std::istream& str, Line& data ) {
 }
 
 int main( int argc, char** argv ) {
-	// process file giving by cin arguments
-	// if no argument, process cin
-
-	// process the input file 'Strings.txt' once.
-	// for each line of the file, extract all word like tokens, which are words containing 
-	// the following: only letters, hyphens, and apostrophes; no numerals.
-
-	// tokens are sorted by alphabet and not by case
-	// put output on cout and in a file
-
-	// with using proper containers and algorithms the code could be as little as ~56 lines of code
 	std::vector<std::string> data;
 
 	if ( argc > 1 ) {
@@ -56,8 +46,8 @@ int main( int argc, char** argv ) {
 		}
 		Read ( file, data );
 	} else {
-		std::cout << "Since no file was supplied, please supply the text which should be cross referenced below." 
-							<< std::endl;
+		std::cout << "Since no file was supplied, please supply the text which should be cross referenced below."
+				<< std::endl;
 		std::cout << "Press [Ctrl + Z] then [Enter] to finish typing:" << std::endl;
 		Read ( std::cin, data );
 	}
@@ -69,19 +59,12 @@ int main( int argc, char** argv ) {
 
 	auto ref = XRef ();
 	ref.process ( data );
-
-	std::cout << ref;
+	std::cout << std::endl << ref << std::endl;
 
 	return 0;
 }
 
 void Read( std::istream& is, std::vector<std::string>& vec ) {
-	// while (is) {
-	//   std::string input;
-	//   std::getline ( is, input );
-	//   vec.push_back ( input );
-	// }
-
 	std::copy ( std::istream_iterator<Line> ( is ), std::istream_iterator<Line> (), std::back_inserter ( vec ) );
 	is.clear ();
 }

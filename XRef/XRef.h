@@ -2,7 +2,7 @@
 // Name: Sam Terrazas
 // File: XRef.h
 // Created: 03/27/2019 6:22 PM
-// Updated: 03/31/2019 8:21 AM
+// Updated: 04/02/2019 8:36 PM
 // 
 // I declare that the following source code was written by me, or provided
 // by the instructor for this project. I understand that copying source
@@ -11,23 +11,20 @@
 // I acknowledge that  If I am found in violation of this policy this may result
 // in a zero grade, a permanent record on file and possibly immediate failure of the class. 
 
-#pragma once
+#ifndef XREF_H
+#define XREF_H
+
 #include <map>
 #include <string>
 #include <vector>
 #include <ostream>
 #include "StringHelper.h"
-#include <iostream>
 
 class XRef final {
 	struct Comp final {
 		bool operator()( const std::string& lhs, const std::string& rhs ) const {
-			if ( STRING_HELPER.iequal ( lhs, rhs ) ) {
-				if ( lhs != rhs )
-					std::cout << lhs << " < " << rhs << std::endl;
-				return lhs < rhs;
-			}
-				return lhs < rhs;
+			if ( STRING_HELPER.iequal ( lhs, rhs ) ) { return lhs < rhs; }
+			return STRING_HELPER.lower ( lhs ) < STRING_HELPER.lower ( rhs );
 		}
 	};
 
@@ -40,10 +37,10 @@ class XRef final {
 
 	void logWord( std::string const& word, size_t lineno );
 	void createEntry( std::string const& word, size_t lineno );
-	void handleEntry( std::map<std::string, std::map<unsigned, unsigned>>::iterator it, size_t const& lineno ) const;
+	void updateEntry( std::map<std::string, std::map<unsigned, unsigned>>::iterator it, size_t const& lineno ) const;
 
-	void showReferences ( std::ostream& os, std::map<size_t, size_t> map );
-	static void showReference ( std::ostream& os, std::pair<unsigned, unsigned> const& p );
+	void showReferences( std::ostream& os, std::map<size_t, size_t> map );
+	static void showReference( std::ostream& os, std::pair<unsigned, unsigned> const& p );
 	static void header( std::ostream& os, std::string const& header, size_t const& width );
 public:
 	auto display( std::ostream& os ) -> void;
@@ -54,3 +51,5 @@ public:
 		return os;
 	}
 };
+#endif // XREF_H
+
