@@ -52,4 +52,3 @@ public:
 	}
 };
 #endif // XREF_H
-
